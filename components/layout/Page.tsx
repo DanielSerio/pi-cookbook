@@ -1,7 +1,7 @@
 import { AppShell, AppShellProps } from '@mantine/core';
 import Head from 'next/head';
 import React from 'react';
-import { AppHeader } from './AppHeader';
+import { AppHeader } from '.';
 
 export interface PageProps extends AppShellProps{
   title: string
