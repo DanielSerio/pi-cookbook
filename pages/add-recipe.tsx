@@ -1,6 +1,7 @@
 import { Text, Title } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import React from 'react';
+import { AddRecipeForm } from '../components/forms';
 
 import { Page } from '../components/layout';
 
@@ -12,7 +13,7 @@ export default function AddRecipe() {
         <Text size={'xl'} color={'grey'} component={'span'}>Add Recipe</Text>
       </Title>
       <NotificationsProvider>
-        
+        <AddRecipeForm />
       </NotificationsProvider>
     </Page>
   );
