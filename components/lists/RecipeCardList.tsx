@@ -2,10 +2,10 @@ import { Image, Badge, Box, Button, Card, createStyles, CSSObject, Group, Text, 
 import { NextLink } from '@mantine/next';
 import React from 'react';
 import { Printer, Tool } from 'tabler-icons-react';
-import { RecipeParams } from '../../lib/types';
+import { RecipeParams, RecipeProps } from '../../lib/types';
 
 export interface RecipeCardListProps {
-  recipes: RecipeParams[]
+  recipes: RecipeProps[]
 }
 
 function createRecipeListStyles(): Record<string, CSSObject> {
@@ -36,7 +36,7 @@ export function RecipeCardList({ recipes }: RecipeCardListProps) {
         { maxWidth: 755, cols: 2, spacing: 'lg' },
         { maxWidth: 600, cols: 1, spacing: 'xl' },
       ]}>
-      {recipes.length && recipes.map((recipe: RecipeParams) => {
+      {recipes.length && recipes.map((recipe: RecipeProps) => {
         return (
           <Card key={recipe.recipeid} shadow={'md'}>
             <Card.Section>

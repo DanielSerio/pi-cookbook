@@ -4,11 +4,11 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Printer } from 'tabler-icons-react';
-import { RecipeParams } from '../../lib/types';
+import { RecipeParams, RecipeProps } from '../../lib/types';
 import { getUUID } from '../../lib/uuild';
 
 interface PrintPageProps {
-  recipes: RecipeParams[]
+  recipes: RecipeProps[]
   recipeid: string
 }
 
@@ -58,7 +58,7 @@ const Print: NextPage<PrintPageProps> = ({ recipes, recipeid }: PrintPageProps) 
 
 export const getServerSideProps = async () => {
   const recipes = await new Promise<RecipeParams[]>((resolve) => {
-    const testValues: RecipeParams[] = [
+    const testValues: RecipeProps[] = [
       {
         name: 'Test Recipe One',
         description: 'Test Recipe One Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',

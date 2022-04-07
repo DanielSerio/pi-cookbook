@@ -4,11 +4,11 @@ import type { NextPage } from 'next'
 import { Suspense } from 'react'
 import { Page } from '../components/layout'
 import { RecipeCardList } from '../components/lists'
-import { RecipeParams } from '../lib/types'
+import { RecipeParams, RecipeProps } from '../lib/types'
 import { getUUID } from '../lib/uuild'
 
 interface HomePageProps {
-  recipes: RecipeParams[]
+  recipes: RecipeProps[]
 }
 
 
@@ -27,7 +27,7 @@ const Home: NextPage<HomePageProps> = ({ recipes }: HomePageProps) => {
 
 export const getServerSideProps = async () => {
   const recipes = await new Promise<RecipeParams[]>((resolve) => {
-    const testValues: RecipeParams[] = [
+    const testValues: RecipeProps[] = [
       {
         name: 'Test Recipe One',
         description: 'Test Recipe One Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
