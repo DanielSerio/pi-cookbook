@@ -36,8 +36,8 @@ export function Page({ title, description, children, ...props }: PageProps) {
       {...props}>
       <Head>
         <title key={0}>{title}</title>
-        <meta key={0} name="description" content={description} />
-        <link key={0} rel="icon" href="/favicon.ico" />
+        <meta key={1} name="description" content={description} />
+        <link key={2} rel="icon" href="/favicon.ico" />
       </Head>
       {children}
     </AppShell>
