@@ -1,13 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { setTimeout } from 'timers/promises'
+import { RecipeParams } from '../../lib/types'
 
 type Data = {
-  name: string
+  recipes: RecipeParams[]
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.status(200).json({ name: 'John Doe' })
+
+  res.status(200).json({ recipes })
 }

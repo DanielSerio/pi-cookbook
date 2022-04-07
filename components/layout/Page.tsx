@@ -18,6 +18,8 @@ function createPageStyles(t: MantineTheme): Record<string, CSSObject> {
     },
     body: {
       minHeight: '100vh',
+      background: t.colorScheme === 'light' ? t.colors.gray[0] : t.colors.dark,
+      color: t.colorScheme === 'light' ? t.colors.dark : t.colors.gray[0]
     }
   })
 }
@@ -37,7 +39,7 @@ export function Page({ title, description, children, ...props }: PageProps) {
         <meta key={0} name="description" content={description} />
         <link key={0} rel="icon" href="/favicon.ico" />
       </Head>
-
+      {children}
     </AppShell>
   );
 }
