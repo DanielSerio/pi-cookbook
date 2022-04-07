@@ -1,4 +1,4 @@
-import { Container, createStyles, Radio, RadioGroup, SimpleGrid, Textarea, TextInput } from '@mantine/core';
+import { Box, Container, createStyles, CSSObject, Group, Radio, RadioGroup, SimpleGrid, Text, Textarea, TextInput } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
 import React from 'react';
 import { Form, FormSection } from './Form';
@@ -6,6 +6,30 @@ import { createFormStyles } from './styles';
 
 const create = createFormStyles
 const useFormStyles = createStyles(create)
+
+const inputHeaderStyles: CSSObject = {
+  display: 'flex', 
+  flexBasis: 0
+}
+
+const IngredientInputHeader = () => {
+  return (
+    <Group sx={inputHeaderStyles} spacing={'xl'}>
+      <Text>Quantity</Text>
+      <Text>UOM</Text>
+      <Text sx={{ flex: 1 }}>Quantity</Text>
+    </Group>
+  )
+}
+
+const StepInputHeader = () => {
+  return (
+    <Group sx={inputHeaderStyles} spacing={'xl'}>
+      <Text>Key</Text>
+      <Text sx={{ flex: 1 }}>Value</Text>
+    </Group>
+  )
+}
 
 export function AddRecipeForm() {
   const { classes } = useFormStyles()
@@ -32,6 +56,8 @@ export function AddRecipeForm() {
   })
 
 
+
+
   return (
     <Form>
       <Container>
@@ -56,10 +82,10 @@ export function AddRecipeForm() {
             </RadioGroup>
           </FormSection>
           <FormSection className={classes.full} title="Ingredients">
-            <span>Ingredients</span>
+            <IngredientInputHeader />
           </FormSection>
           <FormSection className={classes.full} title="Steps">
-            <span>Steps</span>
+            <StepInputHeader />
           </FormSection>
         </SimpleGrid>
       </Container>
