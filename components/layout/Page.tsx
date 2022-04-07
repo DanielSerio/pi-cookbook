@@ -1,6 +1,7 @@
 import { AppShell, AppShellProps } from '@mantine/core';
 import Head from 'next/head';
 import React from 'react';
+import { AppHeader } from './AppHeader';
 
 export interface PageProps extends AppShellProps{
   title: string
@@ -9,7 +10,7 @@ export interface PageProps extends AppShellProps{
 
 export function Page({ title, description, children, ...props }: PageProps) {
   return (
-    <AppShell {...props}>
+    <AppShell header={<AppHeader />} {...props}>
       <Head>
         <title key={0}>{title}</title>
         <meta key={0} name="description" content={description} />
