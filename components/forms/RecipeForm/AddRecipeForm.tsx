@@ -1,8 +1,13 @@
-import { Container, SimpleGrid } from '@mantine/core';
+import { Container, createStyles, SimpleGrid } from '@mantine/core';
 import React from 'react';
 import { Form, FormSection } from './Form';
+import { createFormStyles } from './styles';
+
+const create = createFormStyles
+const useFormStyles = createStyles(create)
 
 export function AddRecipeForm() {
+  const { classes } = useFormStyles()
   return (
     <Form>
       <Container>
@@ -18,13 +23,13 @@ export function AddRecipeForm() {
           <FormSection title="Image">
             <span>Image</span>
           </FormSection>
-          <FormSection title="Weather">
+          <FormSection className={classes.full} title="Weather">
             <span>Weather</span>
           </FormSection>
-          <FormSection title="Ingredients">
+          <FormSection className={classes.full} title="Ingredients">
             <span>Ingredients</span>
           </FormSection>
-          <FormSection title="Steps">
+          <FormSection className={classes.full} title="Steps">
             <span>Steps</span>
           </FormSection>
         </SimpleGrid>
