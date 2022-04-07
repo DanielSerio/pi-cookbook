@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import type { NextPage } from 'next'
 import { Suspense } from 'react'
 import { Page } from '../components/layout'
+import { RecipeCardList } from '../components/lists'
 import { RecipeParams } from '../lib/types'
 
 interface HomePageProps {
@@ -13,13 +14,7 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ recipes }: HomePageProps) => {
   return (
     <Page title="Cookbook | Home" description="Raspberry PI self-hosted cookbook">
-      {recipes.length && recipes.map((recipe: RecipeParams) => {
-        return (
-          <Box key={recipe.recipeid}>
-            <Text>{recipe.name}</Text>
-          </Box>
-        )
-      })}
+      {recipes.length && <RecipeCardList recipes={recipes} />}
     </Page>
   )
 }
@@ -30,18 +25,23 @@ export const getServerSideProps = async () => {
     const testValues: RecipeParams[] = [
       {
         name: 'Test Recipe One',
-        description: 'Test Recipe One Description',
-        recipeid: 'qqqq-qqqq-qqqq-qqqq'
+        description: 'Test Recipe One Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
+        recipeid: 'qqqq-qqqq-qqqq-qqqq',
+        weather: 'warm',
+        img: 'test-one.jpg'
       },
       {
         name: 'Test Recipe Two',
-        description: 'Test Recipe Two Description',
-        recipeid: 'rrrr-qqqq-qqqq-qqqq'
+        description: 'Test Recipe Two Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
+        recipeid: 'rrrr-qqqq-qqqq-qqqq',
+        weather: 'cold',
+        img: 'test-two.jpeg'
       },
       {
         name: 'Test Recipe Three',
-        description: 'Test Recipe Three Description',
-        recipeid: 'ssss-qqqq-qqqq-qqqq'
+        description: 'Test Recipe Three Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
+        recipeid: 'ssss-qqqq-qqqq-qqqq',
+        img: 'test-three.jpg'
       }
     ]
     setTimeout<RecipeParams[]>(() => {
