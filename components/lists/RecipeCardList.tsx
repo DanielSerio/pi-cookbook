@@ -26,12 +26,14 @@ export function RecipeCardList({ recipes }: RecipeCardListProps) {
   return (
 
     <SimpleGrid 
+      my={'xl'}
       cols={4}
       spacing="lg"
+      mx={'auto'}
       breakpoints={[
         { maxWidth: 980, cols: 3, spacing: 'md' },
-        { maxWidth: 755, cols: 2, spacing: 'sm' },
-        { maxWidth: 600, cols: 1, spacing: 'sm' },
+        { maxWidth: 755, cols: 2, spacing: 'lg' },
+        { maxWidth: 600, cols: 1, spacing: 'xl' },
       ]}>
       {recipes.length && recipes.map((recipe: RecipeParams) => {
         return (

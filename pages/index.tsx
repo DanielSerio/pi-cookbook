@@ -1,4 +1,4 @@
-import { Box, Text } from '@mantine/core'
+import { Box, Container, Text } from '@mantine/core'
 import axios, { AxiosResponse } from 'axios'
 import type { NextPage } from 'next'
 import { Suspense } from 'react'
@@ -14,7 +14,11 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ recipes }: HomePageProps) => {
   return (
     <Page title="Cookbook | Home" description="Raspberry PI self-hosted cookbook">
-      {recipes.length && <RecipeCardList recipes={recipes} />}
+      {recipes.length && (
+        <Container sx={{maxWidth: 1300 }}>
+          <RecipeCardList recipes={recipes} />
+        </Container>
+      )}
     </Page>
   )
 }
