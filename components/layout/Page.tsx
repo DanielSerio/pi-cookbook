@@ -10,8 +10,14 @@ export interface PageProps extends AppShellProps{
 
 function createPageStyles(t: MantineTheme): Record<string, CSSObject> {
   return ({
+    root: {
+      '& *::selection': {
+        background: t.colorScheme === 'light' ? t.colors.orange[9] : t.colors.orange[2],
+        color:  t.colorScheme === 'light' ? t.white : t.black
+      }
+    },
     body: {
-      minHeight: '100vh'
+      minHeight: '100vh',
     }
   })
 }
