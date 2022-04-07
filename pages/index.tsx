@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import { Page } from '../components/layout'
 import { RecipeCardList } from '../components/lists'
 import { RecipeParams } from '../lib/types'
+import { getUUID } from '../lib/uuild'
 
 interface HomePageProps {
   recipes: RecipeParams[]
@@ -30,21 +31,21 @@ export const getServerSideProps = async () => {
       {
         name: 'Test Recipe One',
         description: 'Test Recipe One Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
-        recipeid: 'qqqq-qqqq-qqqq-qqqq',
+        recipeid: getUUID(),
         weather: 'warm',
         img: 'test-one.jpg'
       },
       {
         name: 'Test Recipe Two',
         description: 'Test Recipe Two Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
-        recipeid: 'rrrr-qqqq-qqqq-qqqq',
+        recipeid: getUUID(),
         weather: 'cold',
         img: 'test-two.jpeg'
       },
       {
         name: 'Test Recipe Three',
         description: 'Test Recipe Three Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
-        recipeid: 'ssss-qqqq-qqqq-qqqq',
+        recipeid: getUUID(),
         img: 'test-three.jpg'
       }
     ]
