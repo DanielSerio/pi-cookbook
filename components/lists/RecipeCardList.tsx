@@ -1,4 +1,5 @@
 import { Image, Badge, Box, Button, Card, createStyles, CSSObject, Group, Text, ThemeIcon, Grid, SimpleGrid, Title } from '@mantine/core';
+import { NextLink } from '@mantine/next';
 import React from 'react';
 import { Printer, Tool } from 'tabler-icons-react';
 import { RecipeParams } from '../../lib/types';
@@ -51,10 +52,20 @@ export function RecipeCardList({ recipes }: RecipeCardListProps) {
             )}
             <Box>
               <Group>
-                <Button className={classes.cardButton} color={'gray'} component={ThemeIcon} variant='subtle'>
+                <Button 
+                  className={classes.cardButton} 
+                  color={'gray'} 
+                  component={NextLink} 
+                  variant='subtle' 
+                  href={`/edit/${recipe.recipeid}`}>
                     <Tool />
                 </Button>
-                <Button className={classes.cardButton} color={'gray'} component={ThemeIcon} variant='subtle'>
+                <Button 
+                className={classes.cardButton} 
+                color={'gray'} 
+                component={NextLink} 
+                variant='subtle'
+                href={`/print/${recipe.recipeid}`}>
                     <Printer />
                 </Button>
               </Group>
