@@ -34,3 +34,14 @@ export interface FullRecipeProps extends RecipeProps {
 export type RecipeProps = RecipeItem<RecipeParams>
 export type IngredientProps = IngredientItem<RecipeItem<IngredientParams>>
 export type StepProps = StepItem<RecipeItem<StepParams>>
+
+
+export interface FileError {
+  message: string
+  code: number | string
+}
+
+export interface FileRejection {
+  file: File
+  errors: FileError[]
+}

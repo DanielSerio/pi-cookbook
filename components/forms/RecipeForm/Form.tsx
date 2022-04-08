@@ -29,10 +29,10 @@ export function FormSection({title, children, ...props }: FormSectionProps) {
   )
 }
 
-export function Form({ children, submitText, leftIcon }: FormProps) {
+export function Form({ children, submitText, leftIcon, ...props }: FormProps) {
 
   return (
-    <Box component='form'>
+    <Box component='form' {...props}>
       {children}
       <Container>
         <Group my={'xl'}>
