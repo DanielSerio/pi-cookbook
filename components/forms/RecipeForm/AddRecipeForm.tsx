@@ -26,7 +26,7 @@ const inputHeaderStyles: CSSObject = {
   flexBasis: 0
 }
 
-const IngredientInputHeader = () => {
+export const IngredientInputHeader = () => {
   return (
     <Group sx={inputHeaderStyles} mb={'xs'} spacing={'xl'}>
       <Text sx={{ minWidth: '3.85rem' }}>Quantity</Text>
@@ -36,7 +36,7 @@ const IngredientInputHeader = () => {
   )
 }
 
-const StepInputHeader = () => {
+export const StepInputHeader = () => {
   return (
     <Group sx={inputHeaderStyles} spacing={'xl'}>
       <Text>Key</Text>
