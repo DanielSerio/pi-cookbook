@@ -14,12 +14,12 @@ export function HeaderMenu() {
       onOpen={handlers.open}
       onClose={handlers.close}>
         <Menu.Label>Main Menu</Menu.Label>
-        <Menu.Item icon={<Home size={10}/>} component={NextLink} href="/">Home</Menu.Item>
-        <Menu.Item icon={<Plus size={10}/>} component={NextLink} href="/add-recipe">Add Recipe</Menu.Item>
+        <Menu.Item icon={<Home size={12}/>} component={NextLink} href="/">Home</Menu.Item>
+        <Menu.Item icon={<Plus size={12}/>} component={NextLink} href="/add-recipe">Add Recipe</Menu.Item>
         <Divider />
         <Menu.Label>Settings</Menu.Label>
         <Menu.Item 
-          icon={colorScheme === 'light' ? <Moon /> : <Sun />} 
+          icon={colorScheme === 'light' ? <Moon size={12}/> : <Sun size={12}/>} 
           component='button' 
           onClick={() => toggleColorScheme()}>
             {colorScheme === 'light' ? 'Darkmode' : 'Lightmode' }
