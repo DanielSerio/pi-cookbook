@@ -3,7 +3,7 @@ import { Dropzone, DropzoneStatus, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { formList, useForm } from '@mantine/form';
 import { FormList } from '@mantine/form/lib/form-list/form-list';
 import { showNotification } from '@mantine/notifications';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 import { Icon as TablerIcon, Photo, Plus, Trash, Upload, X } from 'tabler-icons-react'
 import { FileRejection, FullRecipeProps, IngredientProps } from '../../../lib/types';
 import { getUUID } from '../../../lib/uuild';
@@ -191,8 +191,14 @@ export function EditRecipeForm({ recipe }: EditRecipeFormProps) {
     console.log(formData)
   }
 
+  const handleResetClick = useCallback(function handleResetClick() {
+    if (recipe.img && recipe.img !== previewURL) {
+      setPreviewURL( `/img/${recipe.img}`)
+    }
+  }, [setPreviewURL, previewURL, recipe])
+
   return (
-    <Form onSubmit={form.onSubmit(handleSubmit)}>
+    <Form onSubmit={form.onSubmit(handleSubmit)} onReset={handleResetClick}>
       <Container>
           <SimpleGrid cols={1} breakpoints={[{minWidth: 600,cols: 2}]}>
             <FormSection title="General">

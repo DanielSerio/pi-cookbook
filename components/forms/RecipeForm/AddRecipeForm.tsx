@@ -39,7 +39,7 @@ export const IngredientInputHeader = () => {
 export const StepInputHeader = () => {
   return (
     <Group sx={inputHeaderStyles} spacing={'xl'}>
-      <Text>Key</Text>
+      <Text sx={{minWidth: '3.4rem'}}>Key</Text>
       <Text sx={{ flex: 1 }}>Value</Text>
     </Group>
   )
