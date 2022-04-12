@@ -3,6 +3,7 @@ import { Dropzone, DropzoneStatus, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { formList, useForm } from '@mantine/form';
 import { FormList } from '@mantine/form/lib/form-list/form-list';
 import { showNotification } from '@mantine/notifications';
+import axios from 'axios';
 import React, { ReactElement, useState } from 'react';
 import { Plus, Trash, Icon as TablerIcon, Upload, X, Photo } from 'tabler-icons-react';
 import { FileRejection, IngredientParams, StepParams } from '../../../lib/types';
@@ -47,6 +48,7 @@ export const StepInputHeader = () => {
 
 export function AddRecipeForm() {
   const [previewURL, setPreviewURL] = useState<string|null>(null)
+  const [file, setFile] = useState<null|File>(null)
   const { classes } = useFormStyles()
   const theme = useMantineTheme()
   const form = useForm({
@@ -182,6 +184,7 @@ export function AddRecipeForm() {
   
   function handleFileDropSuccess(files: File[]) {
     setPreviewURL(URL.createObjectURL(files[0]))
+    setFile(files[0])
     showNotification({
       title: 'Add Recipe Form',
       message: 'Image successfully added',
@@ -191,6 +194,7 @@ export function AddRecipeForm() {
 
   function handleFileDropFailure(files: FileRejection[]) {
     setPreviewURL(null)
+    setFile(null)
     showNotification({
       title: 'Add Recipe Form',
       message: `Image not added. ${files[0].errors[0].message}`,
@@ -200,8 +204,15 @@ export function AddRecipeForm() {
   
 
   function handleSubmit(formData: AddFormType) {
-    if (formData.weather === '') formData.weather = null
-    console.log(formData)
+    const data: FormData = new FormData()
+    data.append('name', formData.name)
+    data.append('description', formData.description)
+    data.append('img', file || '')
+    data.append('weather', formData.weather || '')
+    data.append('ingredients', JSON.stringify(formData.ingredients))
+    data.append('steps', JSON.stringify(formData.steps))
+
+    axios.post('/api/recipe', data)
   }
 
   return (
@@ -223,6 +234,7 @@ export function AddRecipeForm() {
               onDrop={handleFileDropSuccess}
               onReject={handleFileDropFailure}
               maxSize={3 * 1024 ** 2}
+              {...form.getInputProps('img')}
               accept={IMAGE_MIME_TYPE}>
                 {(status: DropzoneStatus) => dropzoneChildren(status, theme)}
             </Dropzone>
