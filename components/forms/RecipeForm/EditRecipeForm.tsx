@@ -3,6 +3,7 @@ import { Dropzone, DropzoneStatus, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { formList, useForm } from '@mantine/form';
 import { FormList } from '@mantine/form/lib/form-list/form-list';
 import { showNotification } from '@mantine/notifications';
+import axios from 'axios';
 import React, { ReactElement, useCallback, useState } from 'react';
 import { Icon as TablerIcon, Photo, Plus, Trash, Upload, X } from 'tabler-icons-react'
 import { FileRejection, FullRecipeProps, IngredientProps } from '../../../lib/types';
@@ -40,6 +41,7 @@ const hiddenStyles: CSSObject = {
 export function EditRecipeForm({ recipe }: EditRecipeFormProps) {
   const { classes } = useFormStyles()
   const [previewURL, setPreviewURL] = useState<string|null>(recipe.img ? `/img/${recipe.img}` : null)
+  const [file, setFile] = useState<null|File>(null)
   const theme = useMantineTheme()
   const ingredientList = formList(recipe.ingredients)
   const stepList = formList(recipe.steps)
@@ -169,6 +171,7 @@ export function EditRecipeForm({ recipe }: EditRecipeFormProps) {
   
   function handleFileDropSuccess(files: File[]) {
     setPreviewURL(URL.createObjectURL(files[0]))
+    setFile(files[0])
     showNotification({
       title: 'Add Recipe Form',
       message: 'Image successfully added',
@@ -187,8 +190,16 @@ export function EditRecipeForm({ recipe }: EditRecipeFormProps) {
   
 
   function handleSubmit(formData: EditFormType) {
-    if (formData.weather === '') formData.weather = null
-    console.log(formData)
+    const data: FormData = new FormData()
+    data.append('name', formData.name)
+    data.append('description', formData.description)
+    data.append('img', file || '')
+    data.append('weather', formData.weather || '')
+    data.append('ingredients', JSON.stringify(formData.ingredients))
+    data.append('steps', JSON.stringify(formData.steps))
+    const url: string = `/api/recipe/${formData.recipeid}`
+    alert(url)
+    axios.put(url, data)
   }
 
   const handleResetClick = useCallback(function handleResetClick() {
