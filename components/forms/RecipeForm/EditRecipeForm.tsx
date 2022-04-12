@@ -198,7 +198,6 @@ export function EditRecipeForm({ recipe }: EditRecipeFormProps) {
     data.append('ingredients', JSON.stringify(formData.ingredients))
     data.append('steps', JSON.stringify(formData.steps))
     const url: string = `/api/recipe/${formData.recipeid}`
-    alert(url)
     axios.put(url, data)
   }
 
