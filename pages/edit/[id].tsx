@@ -2,6 +2,7 @@ import knex from 'knex';
 import { GetStaticPaths, NextPage } from 'next';
 import React from 'react';
 import { EditRecipeForm } from '../../components/forms';
+import { DeleteRecipeForm } from '../../components/forms/DeleteForm';
 import { Page } from '../../components/layout';
 import { FullRecipeProps, IngredientProps, RecipeProps, StepProps } from '../../lib/types';
 
@@ -15,6 +16,7 @@ const EditPage: NextPage<FullRecipeProp> = ({ recipe }: FullRecipeProp) => {
   return (
     <Page title={`${recipe.name} | Edit`} description={`${recipe.name}`}>
       <EditRecipeForm recipe={recipe}/>
+      <DeleteRecipeForm recipeName={recipe.name} recipeid={recipe.recipeid}/>
     </Page>
   );
 }
