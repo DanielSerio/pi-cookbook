@@ -23,7 +23,11 @@ const EditPage: NextPage<FullRecipeProp> = ({ recipe }: FullRecipeProp) => {
 export const getStaticProps = async (context: { params: { id: string } }) => {
   const recipeid: string = context.params.id
   const recipes = await knex('recipes').select('*').from('recipe').where({ recipeid })
-  if (!recipes[0]) throw new Error(`No recipe applies`)
+  if (!recipes[0]) {
+    return {
+      notFound: true
+    }
+  }
   const recipe: RecipeProps = recipes[0]
   const ingredients: IngredientProps[] = await knex('recipes').select('*').from('ingredient').where({ recipeid })
   const steps: StepProps[] = await knex('recipes').select('*').from('step').where({ recipeid })
@@ -45,7 +49,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
 
   return {
       paths: [], 
-      fallback: 'blocking'
+      fallback: 'blocking',
   }
 }
 
