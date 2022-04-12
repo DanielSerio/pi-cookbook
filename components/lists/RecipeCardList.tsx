@@ -24,6 +24,11 @@ const useRecipeListStyles = createStyles(createRecipeListStyles)
 
 export function RecipeCardList({ recipes }: RecipeCardListProps) {
   const { classes } = useRecipeListStyles()
+
+  if (!recipes || !recipes.length) {
+    return <>No Recipes</>
+  }
+
   return (
 
     <SimpleGrid 

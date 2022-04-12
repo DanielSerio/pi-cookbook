@@ -1,5 +1,6 @@
 import { Box, Container, Text } from '@mantine/core'
 import axios, { AxiosResponse } from 'axios'
+import knex from 'knex'
 import type { NextPage } from 'next'
 import { Suspense } from 'react'
 import { Page } from '../components/layout'
@@ -15,7 +16,8 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ recipes }: HomePageProps) => {
   return (
     <Page title="Cookbook | Home" description="Raspberry PI self-hosted cookbook">
-      {recipes.length && (
+      {!recipes || !recipes.length && <Text sx={{ fontSize: 48, textAlign: 'center' }} color={'dimmed'}>No recipes</Text>}
+      {Boolean(recipes.length) && (
         <Container sx={{maxWidth: 1300 }}>
           <RecipeCardList recipes={recipes} />
         </Container>
@@ -26,39 +28,12 @@ const Home: NextPage<HomePageProps> = ({ recipes }: HomePageProps) => {
 
 
 export const getServerSideProps = async () => {
-  const recipes = await new Promise<RecipeParams[]>((resolve) => {
-    const testValues: RecipeProps[] = [
-      {
-        name: 'Test Recipe One',
-        description: 'Test Recipe One Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
-        recipeid: getUUID(),
-        weather: 'warm',
-        img: 'test-one.jpg'
-      },
-      {
-        name: 'Test Recipe Two',
-        description: 'Test Recipe Two Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
-        recipeid: getUUID(),
-        weather: 'cold',
-        img: 'test-two.jpeg'
-      },
-      {
-        name: 'Test Recipe Three',
-        description: 'Test Recipe Three Description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repudiandae dolorem at! Incidunt maiores veritatis quidem dolorum nobis totam accusantium molestiae corporis aliquid sint officia mollitia soluta, eaque debitis eveniet!',
-        recipeid: getUUID(),
-        img: 'test-three.jpg'
-      }
-    ]
-    setTimeout<RecipeParams[]>(() => {
-      resolve(testValues)
-    }, 1100)
-
-  })
+  const recipes = await knex('recipes').select('*').from('recipe')
 
 
   return {
     props: {
-      recipes: recipes
+      recipes: !recipes ? [] : recipes
     }
   }
 }

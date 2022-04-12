@@ -54,11 +54,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       async function downloadImage(file: File) {
         const mime: string = file.mimetype?.replace('image/', '') || 'jpg'
         const data: string = await readFileSync(file.filepath, { encoding: 'base64'})
+          .replace(/^data:image\/png;base64,/, '')
         const url: string = `${process.cwd()}/public/img/${file.newFilename}.${mime === 'png' ? 'png' : 'jpg'}`
 
         const fileExists: boolean = await existsSync(url)
         if (!fileExists) await openSync(url, 'w+')
-        await writeFileSync(url,  data)
+        await writeFileSync(url,  `${data}`, 'base64')
       }
 
       if (err) {
